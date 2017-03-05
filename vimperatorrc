@@ -1,0 +1,122 @@
+javascript <<EOS
+
+window.addEventListener('keypress',function (event) {
+  var code=event.charCode;
+  if ((liberator.mode === modes.INSERT && modes.extended === modes.MENU)
+  ||(liberator.mode ==modes.NORMAL && code==32)
+  ||(liberator.mode ==modes.COMMAND_LINE && code !=32)){
+    let map = mappings.get(liberator.mode, events.toString(event));
+    if (map) {
+      event.preventDefault();
+      event.stopPropagation();
+      map.execute();
+    }
+  }
+},false);
+
+closeAllToRight = function () {
+    var current = tabs.getTab();
+    var currentIx = tabs.index(current);
+    var nexttab = current.nextElementSibling;
+    var N = tabs.count;
+    var numToClose = N - (currentIx + 1);
+    tabs.remove(nexttab, numToClose);
+}
+
+closeAllToLeft = function () {
+    var current = tabs.getTab();
+    var currentIx = tabs.index(current);
+    var firsttab = tabs.getTab(0);
+    var N = tabs.count;
+    var numToClose = currentIx;
+    tabs.remove(firsttab, numToClose);
+}
+
+
+hints.addMode("p", "Open with mpv (1080p):", 
+(elem, loc) => 
+liberator.execute("silent !go_mpv \"" + loc + "\" &", null, true));
+
+hints.addMode("d", "Download with aria2:", 
+(elem, loc) => 
+liberator.execute("!youtube-dl --proxy socks5://localhost:1080 -d ~/Downloads/new '" + loc + "' &", null, true));
+
+EOS
+
+" My Customization
+
+set gui=tabs
+
+map <Space> <Leader>
+
+set animations
+
+set focuscontent
+
+let mapleader="\"
+
+command! closealltoright :js closeAllToRight()
+
+command! closealltoleft :js closeAllToLeft()
+
+noremap <C-q> q
+noremap q <Nop>
+noremap q d
+noremap d <Nop>
+
+noremap j 2j
+noremap k 2k
+noremap <Leader>a :js closeAllToLeft()<CR>
+noremap <Leader>e :js closeAllToRight()<CR>
+noremap <Leader>s /
+noremap <Leader>pp :tabopen https://getpocket.com/a/queue/<CR>
+noremap <Leader>wd :tabdetach<CR>
+noremap <Leader>wa :tabattach<Space>
+noremap <Leader>wv W<CR>
+noremap <Leader>qq :wq<CR>
+noremap <Leader>h :history!
+noremap <Leader>ff :bmarks!
+noremap <Leader>gg :tabgroups pushtab!
+noremap <Leader>gs :tabgroups 1switch<CR>
+noremap B :bdelete!
+noremap <A-x> :
+noremap <M-x> :
+cmap <C-n> <Tab>
+cmap <C-p> <S-Tab>
+cmap <C-f> <Right>
+cmap <C-b> <Left>
+cmap <C-j> <CR>
+noremap <C-j> <CR>
+inoremap <C-j> <CR>
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+noremap J gT
+noremap K gt
+
+cmap <C-g> <Esc>
+imap <C-g> <Esc>
+noremap <C-g> <Esc>
+
+noremap <Leader>1 <A-1>
+noremap <Leader>2 <A-2>
+noremap <Leader>3 <A-3>
+noremap <Leader>4 <A-4>
+noremap <Leader>5 <A-5>
+noremap <Leader>6 <A-6>
+noremap <Leader>7 <A-7>
+noremap <Leader>8 <A-8>
+noremap <Leader>9 <A-9>
+
+
+noremap <Leader><Tab> :tablast<CR>
+
+bmark https://wiki.archlinux.org/index.php?search=%s -keyword=arch
+bmark https://github.com/search?utf8=%E2%9C%93&q=%s -keyword=git
+bmark http://search.jd.com/Search?keyword=%s -keyword=js
+bmark http://dict.youdao.com/search?q=%s -keyword=yd
+bmark http://www.baidu.com/baidu?wd=%s -keyword=bd
+bmark https://aur.archlinux.org/packages/?K=%s -keyword=aur
+
+set complete='l'
