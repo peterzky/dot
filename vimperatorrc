@@ -109,6 +109,9 @@ noremap <Leader>7 <A-7>
 noremap <Leader>8 <A-8>
 noremap <Leader>9 <A-9>
 
+noremap > :tabmove +1<CR>
+noremap < :tabmove -1<CR>
+
 
 noremap <Leader><Tab> :tablast<CR>
 
