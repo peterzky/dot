@@ -39,7 +39,7 @@ liberator.execute("silent !go_mpv \"" + loc + "\" &", null, true));
 
 hints.addMode("d", "Download with aria2:", 
 (elem, loc) => 
-liberator.execute("!youtube-dl --proxy socks5://localhost:1080 -d ~/Downloads/new '" + loc + "' &", null, true));
+liberator.execute("!aria2c -d ~\/Downloads\/downloads\/ '" + loc + "'", null, true));
 
 EOS
 
@@ -78,6 +78,8 @@ noremap <Leader>h :history!
 noremap <Leader>ff :bmarks!
 noremap <Leader>gg :tabgroups pushtab!
 noremap <Leader>gs :tabgroups 1switch<CR>
+noremap <Leader>pa :set! extensions.autoproxy.proxyMode=auto<CR>
+noremap <Leader>pg :set! extensions.autoproxy.proxyMode=global<CR>
 noremap B :bdelete!
 noremap <A-x> :
 noremap <M-x> :
@@ -108,6 +110,9 @@ noremap <Leader>6 <A-6>
 noremap <Leader>7 <A-7>
 noremap <Leader>8 <A-8>
 noremap <Leader>9 <A-9>
+
+noremap > :tabmove +1<CR>
+noremap < :tabmove -1<CR>
 
 
 noremap <Leader><Tab> :tablast<CR>
