@@ -102,5 +102,5 @@ alias ydm='http_proxy="http://localhost:8123" https_proxy="http://localhost:8123
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 eval "$(fasd --init auto)"
+source /home/peterzky/tools/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
