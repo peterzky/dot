@@ -100,6 +100,7 @@ alias proxy='http_proxy="http://localhost:8123" https_proxy="http://localhost:81
 alias yd='http_proxy="http://localhost:8123" https_proxy="http://localhost:8123" youtube-dl --external-downloader aria2c  --external-downloader-args -x16'
 alias ydm='http_proxy="http://localhost:8123" https_proxy="http://localhost:8123" youtube-dl -x --audio-format best --external-downloader aria2c  --external-downloader-args -x16'
 
-alias cabal='proxychains cabal'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(fasd --init auto)"
